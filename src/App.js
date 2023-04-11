@@ -3,6 +3,9 @@ import './style.css';
 import {
   AreaSeries,
   BarSeries,
+  Circle,
+  CircleSeries,
+  LineSeries,
   ArcSeries,
   Tooltip,
   ChartProvider,
@@ -31,6 +34,258 @@ const data = [
   { name: 'Britan Avarage yearly salary', value2: 40699 },
   { name: 'Elon Musk', value2: 192300000000 },
   { name: 'US GDP', value2: 20890000000000 },
+];
+const states = [
+  {
+    name: 'Wyoming',
+    electoralVotes: 3,
+    population: 567025,
+  },
+  {
+    name: 'Vermont',
+    electoralVotes: 3,
+    population: 643503,
+  },
+  {
+    name: 'Alaska',
+    electoralVotes: 3,
+    population: 737438,
+  },
+  {
+    name: 'North Dakota',
+    electoralVotes: 3,
+    population: 779094,
+  },
+  {
+    name: 'South Dakota',
+    electoralVotes: 3,
+    population: 884659,
+  },
+  {
+    name: 'Delaware',
+    electoralVotes: 3,
+    population: 989948,
+  },
+  {
+    name: 'Montana',
+    electoralVotes: 3,
+    population: 1085404,
+  },
+  {
+    name: 'Rhode Island',
+    electoralVotes: 4,
+    population: 1097379,
+  },
+  {
+    name: 'Maine',
+    electoralVotes: 4,
+    population: 1362359,
+  },
+  {
+    name: 'New Hampshire',
+    electoralVotes: 4,
+    population: 1377529,
+  },
+  {
+    name: 'Hawaii',
+    electoralVotes: 4,
+    population: 1455271,
+  },
+  {
+    name: 'West Virginia',
+    electoralVotes: 5,
+    population: 1793716,
+  },
+  {
+    name: 'Idaho',
+    electoralVotes: 4,
+    population: 1839106,
+  },
+  {
+    name: 'Nebraska',
+    electoralVotes: 5,
+    population: 1961504,
+  },
+  {
+    name: 'New Mexico',
+    electoralVotes: 5,
+    population: 2117522,
+  },
+  {
+    name: 'Kansas',
+    electoralVotes: 6,
+    population: 2937880,
+  },
+  {
+    name: 'Mississippi',
+    electoralVotes: 6,
+    population: 2961279,
+  },
+  {
+    name: 'Arkansas',
+    electoralVotes: 6,
+    population: 3011524,
+  },
+  {
+    name: 'Nevada',
+    electoralVotes: 6,
+    population: 3108462,
+  },
+  {
+    name: 'Iowa',
+    electoralVotes: 6,
+    population: 3192406,
+  },
+  {
+    name: 'Utah',
+    electoralVotes: 6,
+    population: 3271616,
+  },
+  {
+    name: 'Connecticut',
+    electoralVotes: 7,
+    population: 3605944,
+  },
+  {
+    name: 'Oklahoma',
+    electoralVotes: 7,
+    population: 3953822,
+  },
+  {
+    name: 'Oregon',
+    electoralVotes: 7,
+    population: 4241500,
+  },
+  {
+    name: 'Kentucky',
+    electoralVotes: 8,
+    population: 4505836,
+  },
+  {
+    name: 'Louisiana',
+    electoralVotes: 8,
+    population: 4657757,
+  },
+  {
+    name: 'Alabama',
+    electoralVotes: 9,
+    population: 5024279,
+  },
+  {
+    name: 'South Carolina',
+    electoralVotes: 9,
+    population: 5148714,
+  },
+  {
+    name: 'Minnesota',
+    electoralVotes: 10,
+    population: 5706494,
+  },
+  {
+    name: 'Colorado',
+    electoralVotes: 9,
+    population: 5773714,
+  },
+  {
+    name: 'Wisconsin',
+    electoralVotes: 10,
+    population: 5851754,
+  },
+  {
+    name: 'Missouri',
+    electoralVotes: 10,
+    population: 6169038,
+  },
+  {
+    name: 'Maryland',
+    electoralVotes: 10,
+    population: 6177224,
+  },
+  {
+    name: 'Indiana',
+    electoralVotes: 11,
+    population: 6785528,
+  },
+  {
+    name: 'Tennessee',
+    electoralVotes: 11,
+    population: 6910840,
+  },
+  {
+    name: 'Massachusetts',
+    electoralVotes: 11,
+    population: 7029917,
+  },
+  {
+    name: 'Arizona',
+    electoralVotes: 11,
+    population: 7151502,
+  },
+  {
+    name: 'Washington',
+    electoralVotes: 12,
+    population: 7693612,
+  },
+  {
+    name: 'Virginia',
+    electoralVotes: 13,
+    population: 8631393,
+  },
+  {
+    name: 'New Jersey',
+    electoralVotes: 14,
+    population: 9288994,
+  },
+  {
+    name: 'Michigan',
+    electoralVotes: 16,
+    population: 10077331,
+  },
+  {
+    name: 'North Carolina',
+    electoralVotes: 15,
+    population: 10453948,
+  },
+  {
+    name: 'Georgia',
+    electoralVotes: 16,
+    population: 10711908,
+  },
+  {
+    name: 'Ohio',
+    electoralVotes: 18,
+    population: 11799448,
+  },
+  {
+    name: 'Illinois',
+    electoralVotes: 20,
+    population: 12812508,
+  },
+  {
+    name: 'Pennsylvania',
+    electoralVotes: 20,
+    population: 13011844,
+  },
+  {
+    name: 'New York',
+    electoralVotes: 29,
+    population: 20215751,
+  },
+  {
+    name: 'Florida',
+    electoralVotes: 29,
+    population: 21538187,
+  },
+  {
+    name: 'Texas',
+    electoralVotes: 38,
+    population: 29145505,
+  },
+  {
+    name: 'California',
+    electoralVotes: 55,
+    population: 39538223,
+  },
 ];
 const arrayData = Array.from({ length: 64 }, (x, i) => i).map((number) => {
   // number = number + 20;
@@ -64,14 +319,14 @@ export default function App() {
         />
         <Tooltip />
       </ChartProvider> */}
-      <ChartProvider height={400} data={properbilities}>
-        <XAxis
+      <ChartProvider height={400} data={states}>
+        {/* <XAxis
           format={(t) => {
             if (t % 10 === 0) return t;
           }}
           dataKey="name"
         />
-        <YAxis />
+        <YAxis /> */}
         {/* <YAxis format={(ticks) => ticks / 1000000000000000000 + 'Q'} /> */}
 
         {/* <BarSeries
@@ -83,20 +338,60 @@ export default function App() {
           }}
         /> */}
         {/* <ArcSeries
-          dataKey="value2"
+          dataKey="electoralVotes"
           options={{
-            fill: colors[14],
-            stroke: colors[14],
+            fill: colors[4],
+            stroke: colors[4],
             strokeWidth: 1,
-          }} />*/}
-        <AreaSeries
+          }} /> */}
+        {/* <AreaSeries
           dataKey="value2"
           options={{
             fill: colors[14],
             stroke: colors[14],
             strokeWidth: 1,
           }}
+        /> */}
+        <YAxis dataKey="electoralVotes" format={(tick) => `
+        ${tick}`} />
+        <XAxis
+          dataKey="population"
+          format={(tick) => {
+            let objec = states.find((e) => e.population === tick);
+            let index = states.indexOf(objec);
+            console.log(tick, index);
+            if (index % 4 === 0) {
+              return `${(tick / 1000000).toFixed(1)} Mio`;
+            }
+            // return 'd'
+          }}
         />
+        <CircleSeries dataKey="electoralVotes">
+          {(item, itemProps, index) => (
+            <Circle
+              key={index}
+              {...itemProps}
+              diameter={10 + item.electoralVotes * 2}
+              options={{
+                fill: colors[index % colors.length],
+              }}
+            />
+          )}
+        </CircleSeries>
+        {/* <LineSeries
+      dataKey="electoralVotes"
+      options={{
+        stroke: colors[0],
+        strokeWidth: 1,
+      }}
+    /> */}
+        {/* <LineSeries
+      dataKey="population"
+      options={{
+        stroke: colors[3],
+        strokeWidth: 2,
+      }}
+    /> */}
         <Tooltip />
       </ChartProvider>
     </div>
