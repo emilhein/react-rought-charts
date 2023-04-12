@@ -286,7 +286,10 @@ const states = [
     electoralVotes: 55,
     population: 39538223,
   },
-];
+].map((e) => {
+  e.power = parseFloat(e.population / e.electoralVotes).toFixed(2);
+  return e;
+});
 const arrayData = Array.from({ length: 64 }, (x, i) => i).map((number) => {
   // number = number + 20;
   // return { name: `Field ${number + 1}`, value2: Math.pow(2, number) };
@@ -320,53 +323,31 @@ export default function App() {
         <Tooltip />
       </ChartProvider> */}
       <ChartProvider height={400} data={states}>
-        {/* <XAxis
-          format={(t) => {
-            if (t % 10 === 0) return t;
+        <BarSeries
+          dataKey="power"
+          options={{
+            fill: colors[8],
+            stroke: colors[8],
+            strokeWidth: 1,
           }}
-          dataKey="name"
         />
-        <YAxis /> */}
-        {/* <YAxis format={(ticks) => ticks / 1000000000000000000 + 'Q'} /> */}
-
-        {/* <BarSeries
-          dataKey="value2"
-          options={{
-            fill: colors[14],
-            stroke: colors[14],
-            strokeWidth: 1,
-          }}
-        /> */}
-        {/* <ArcSeries
-          dataKey="electoralVotes"
-          options={{
-            fill: colors[4],
-            stroke: colors[4],
-            strokeWidth: 1,
-          }} /> */}
-        {/* <AreaSeries
-          dataKey="value2"
-          options={{
-            fill: colors[14],
-            stroke: colors[14],
-            strokeWidth: 1,
-          }}
-        /> */}
-        <YAxis dataKey="electoralVotes" format={(tick) => `
-        ${tick}`} />
+        {/* <YAxis /> */}
+        <YAxis dataKey="power" format={(tick) => `${tick / 1000} K`} />
+        {/* <XAxis   dataKey="name" /> */}
         <XAxis
-          dataKey="population"
+          dataKey="name"
           format={(tick) => {
-            let objec = states.find((e) => e.population === tick);
+            let objec = states.find((e) => e.name === tick);
             let index = states.indexOf(objec);
-            console.log(tick, index);
-            if (index % 4 === 0) {
-              return `${(tick / 1000000).toFixed(1)} Mio`;
+            if (index % 8 === 0) {
+              return `${tick}`;
+              // return `${(tick / 1000000).toFixed(1)} Mio`;
             }
-            // return 'd'
+            // return tick;
           }}
         />
-        <CircleSeries dataKey="electoralVotes">
+
+        {/* <CircleSeries dataKey="electoralVotes">
           {(item, itemProps, index) => (
             <Circle
               key={index}
@@ -377,23 +358,64 @@ export default function App() {
               }}
             />
           )}
-        </CircleSeries>
-        {/* <LineSeries
-      dataKey="electoralVotes"
-      options={{
-        stroke: colors[0],
-        strokeWidth: 1,
-      }}
-    /> */}
-        {/* <LineSeries
-      dataKey="population"
-      options={{
-        stroke: colors[3],
-        strokeWidth: 2,
-      }}
-    /> */}
+        </CircleSeries> */}
         <Tooltip />
       </ChartProvider>
     </div>
   );
 }
+
+// {/* <XAxis
+//       format={(t) => {
+//         if (t % 10 === 0) return t;
+//       }}
+//       dataKey="name"
+//     />
+//     <YAxis /> */}
+//     {/* <YAxis format={(ticks) => ticks / 1000000000000000000 + 'Q'} /> */}
+
+//     {/* <BarSeries
+//       dataKey="value2"
+//       options={{
+//         fill: colors[14],
+//         stroke: colors[14],
+//         strokeWidth: 1,
+//       }}
+//     /> */}
+//     {/* <ArcSeries
+//       dataKey="electoralVotes"
+//       options={{
+//         fill: colors[4],
+//         stroke: colors[4],
+//         strokeWidth: 1,
+//       }} /> */}
+//     {/* <AreaSeries
+//       dataKey="value2"
+//       options={{
+//         fill: colors[14],
+//         stroke: colors[14],
+//         strokeWidth: 1,
+//       }}
+//     /> */}
+// {/* <BarSeries
+//   dataKey="power"
+//   options={{
+//     fill: colors[8],
+//     stroke: colors[8],
+//     strokeWidth: 1,
+//   }}
+// /> */}
+// {/* <LineSeries
+// dataKey="power"
+// options={{
+// stroke: colors[5],
+// strokeWidth: 3,
+// }}
+// /> */}
+// {/* <LineSeries
+// dataKey="population"
+// options={{
+// stroke: colors[3],
+// strokeWidth: 2,
+// }}
+// /> */}
