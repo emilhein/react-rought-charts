@@ -326,8 +326,8 @@ export default function App() {
         <BarSeries
           dataKey="power"
           options={{
-            fill: colors[8],
-            stroke: colors[8],
+            fill: colors[13],
+            stroke: colors[13],
             strokeWidth: 1,
           }}
         />
