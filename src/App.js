@@ -290,19 +290,50 @@ const states = [
   e.power = parseFloat(e.population / e.electoralVotes).toFixed(2);
   return e;
 });
-const arrayData = Array.from({ length: 64 }, (x, i) => i).map((number) => {
-  // number = number + 20;
-  // return { name: `Field ${number + 1}`, value2: Math.pow(2, number) };
-  return { name: number + 1, value2: Math.pow(2, number) };
+
+const enrichedStates = states.map((state, index) => {
+  if (index === 0) {
+    state.totalVotes = state.electoralVotes;
+    state.totalVotesUnderReq = state.electoralVotes;
+    state.totalVotesOverReq = 0;
+  } else {
+    let prevTotal = states
+      .filter((_, lookupIndex) => lookupIndex < index)
+      .map((e) => e.electoralVotes)
+      .reduce((partialSum, a) => partialSum + a, 0);
+
+    state.totalVotes = prevTotal + state.electoralVotes;
+    if (prevTotal + state.electoralVotes <= 270) {
+      state.totalVotesUnderReq = prevTotal + state.electoralVotes;
+      state.totalVotesOverReq = 0;
+    } else {
+      state.totalVotesOverReq = prevTotal + state.electoralVotes;
+      state.totalVotesUnderReq = 0;
+    }
+  }
+  return state;
 });
-let propOfNotHavingSameData = 364 / 365;
-const properbilities = Array.from({ length: 50 }, (x, i) => i).map((number) => {
-  return {
-    name: number + 1,
-    value2: 1 - Math.pow(propOfNotHavingSameData, (number * (number + 1)) / 2),
-  };
-  // return { name: number + 1, value2: 1-Math.pow(propOfNotHavingSameData, number+1) };
-});
+// .reduce(
+//   (prev, item) => {
+//     item.totalVotes = prev.totalVotes + item.electoralVotes;
+//     return item;
+//   },
+//   { totalVotes: 0 }
+// );
+
+// const arrayData = Array.from({ length: 64 }, (x, i) => i).map((number) => {
+//   // number = number + 20;
+//   // return { name: `Field ${number + 1}`, value2: Math.pow(2, number) };
+//   return { name: number + 1, value2: Math.pow(2, number) };
+// });
+// let propOfNotHavingSameData = 364 / 365;
+// const properbilities = Array.from({ length: 50 }, (x, i) => i).map((number) => {
+//   return {
+//     name: number + 1,
+//     value2: 1 - Math.pow(propOfNotHavingSameData, (number * (number + 1)) / 2),
+//   };
+//   // return { name: number + 1, value2: 1-Math.pow(propOfNotHavingSameData, number+1) };
+// });
 
 export default function App() {
   return (
@@ -360,6 +391,35 @@ export default function App() {
           )}
         </CircleSeries> */}
         <Tooltip />
+      </ChartProvider>
+      <ChartProvider height={400} data={enrichedStates}>
+        <BarSeries
+          dataKey="totalVotesUnderReq"
+          options={{
+            fill: colors[14],
+            stroke: colors[14],
+          }}
+        />
+        <BarSeries
+          dataKey="totalVotesOverReq"
+          options={{
+            fill: colors[3],
+            stroke: colors[3],
+          }}
+        />
+        <YAxis dataKey="totalVotes" />
+        <XAxis
+          dataKey="name"
+          format={(tick) => {
+            let objec = states.find((e) => e.name === tick);
+            let index = states.indexOf(objec);
+            if (index % 8 === 0) {
+              return `${tick}`;
+              // return `${(tick / 1000000).toFixed(1)} Mio`;
+            }
+            // return tick;
+          }}
+        />{' '}
       </ChartProvider>
     </div>
   );
